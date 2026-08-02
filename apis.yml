@@ -1,17 +1,35 @@
 aid: mission-bio
 name: Mission Bio
-description: 'Mission Bio is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Mission Bio is a South San Francisco single-cell multi-omics company
+  whose Tapestri Platform simultaneously resolves DNA variants, copy number, protein
+  and RNA signal from the same individual cell, for oncology, precision medicine and
+  cell-and-gene-therapy research. Its developer surface is not a web API: Mission Bio
+  ships a first-party Python analysis stack — Mosaic (tertiary analysis and visualization
+  of the Tapestri .h5 file), plus missionbio.h5, missionbio.demultiplex, missionbio.plotting,
+  missionbio.annotation, missionbio.filter and a tapestri CLI — distributed on the
+  missionbio Anaconda channel and documented at missionbio.github.io. Data is produced
+  by the Tapestri Pipeline and managed through the Tapestri Portal; no public REST,
+  GraphQL, MCP or event contract is published.'
 url: https://raw.githubusercontent.com/api-evangelist/mission-bio/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
 x-tier: stub
 x-tier-reason: harvest
+image: https://cdn.sanity.io/images/98tnxhqn/production/b6650c303fe1615e07ddb6abd839e65ff7ad8e9b-448x332.png
 specificationVersion: '0.20'
 created: '2026-08-01'
 modified: '2026-08-01'
 tags:
 - Company
+- Life Sciences
+- Genomics
+- Single Cell
+- Multi-omics
+- Bioinformatics
+- Oncology
+- Precision Medicine
+- Python Libraries
+- Scientific Computing
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -19,5 +37,53 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/mission-bio-domain-security.yml
 - type: Website
+  url: https://www.missionbio.com/
+- type: DeveloperPortal
+  url: https://missionbio.github.io/
+- type: Documentation
+  url: https://missionbio.github.io/mosaic/
+- type: APIReference
+  url: https://missionbio.github.io/mosaic/py-modindex.html
+- type: GettingStarted
+  url: https://missionbio.github.io/mosaic/manual/getting_started.html
+- type: Support
+  url: https://support.missionbio.com/hc/en-us
+- type: Blog
+  url: https://www.missionbio.com/company/blog
+- type: GitHubOrganization
+  url: https://github.com/MissionBio
+- type: Login
+  url: https://portal.missionbio.com/login
+- type: TermsOfService
+  url: https://www.missionbio.com/legal/terms-of-use
+- type: PrivacyPolicy
+  url: https://www.missionbio.com/legal/privacy-policy
+- type: SecondaryMarket
   url: https://forgeglobal.com/mission-bio_stock/
+- type: ChangeLog
+  url: https://missionbio.github.io/mosaic/manual/changelog.html
+- type: Packages
+  url: packages/mission-bio-packages.yml
+- type: SDKs
+  url: packages/mission-bio-packages.yml
+- type: CLI
+  url: cli/mission-bio-cli.yml
+- type: ChangeLog
+  name: Mosaic release notes (captured)
+  url: changelog/mission-bio-changelog.yml
+- type: Lifecycle
+  url: lifecycle/mission-bio-lifecycle.yml
+- type: DataModel
+  url: data-model/mission-bio-data-model.yml
+- type: Conformance
+  url: conformance/mission-bio-conformance.yml
+- type: LLMsTxt
+  url: llms/mission-bio-llms.txt
+x-enrichment:
+  date: '2026-08-01'
+  status: enriched
+  artifacts_added: 9
+  pass: local-v1

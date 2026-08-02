@@ -1,0 +1,80 @@
+generated: '2026-08-01'
+method: probed
+source: live HTTPS GET of /.well-known/* on every Mission Bio host
+result: none
+summary: >-
+  Mission Bio publishes NO /.well-known/ discovery document on any of its hosts.
+  No security.txt (RFC 9116), no OIDC discovery, no RFC 8414 authorization-server
+  metadata, no RFC 9727 api-catalog, no ai-plugin.json, and no A2A agent card at
+  either the canonical /.well-known/agent-card.json or the legacy
+  /.well-known/agent.json path. Because nothing was found, this repo deliberately
+  carries NO `WellKnown`, `SecurityTxt`, `APICatalog` or `AgentCard` pointer in
+  apis.yml — this file is the negative-result record of the probe, not a discovery
+  surface.
+false_positives:
+  note: >-
+    portal.missionbio.com is a CloudFront-fronted single-page app whose catch-all
+    returns HTTP 200 with the same 1,749-byte HTML shell for EVERY /.well-known/*
+    path (and for /openapi.json, /swagger.json, /api-docs and /llms.txt). Those 200s
+    are NOT documents and were rejected. tapestripipeline.missionbio.com behaves the
+    same way, with S3 AccessDenied (403 application/xml) on the paths its SPA router
+    does not claim.
+  rejected_hosts:
+  - portal.missionbio.com
+  - tapestripipeline.missionbio.com
+hosts:
+- host: www.missionbio.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: missionbio.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: portal.missionbio.com
+  documents:
+  - {path: /.well-known/security.txt, status: 200, content_type: text/html, accepted: false, reason: spa-catch-all}
+  - {path: /.well-known/openid-configuration, status: 200, content_type: text/html, accepted: false, reason: spa-catch-all}
+  - {path: /.well-known/oauth-authorization-server, status: 200, content_type: text/html, accepted: false, reason: spa-catch-all}
+  - {path: /.well-known/oauth-protected-resource, status: 200, content_type: text/html, accepted: false, reason: spa-catch-all}
+  - {path: /.well-known/api-catalog, status: 200, content_type: text/html, accepted: false, reason: spa-catch-all}
+  - {path: /.well-known/ai-plugin.json, status: 200, content_type: text/html, accepted: false, reason: spa-catch-all}
+  - {path: /.well-known/agent-card.json, status: 200, content_type: text/html, accepted: false, reason: spa-catch-all}
+  - {path: /.well-known/agent.json, status: 200, content_type: text/html, accepted: false, reason: spa-catch-all}
+- host: tapestripipeline.missionbio.com
+  documents:
+  - {path: /.well-known/security.txt, status: 403, content_type: application/xml, accepted: false, reason: s3-access-denied}
+  - {path: /.well-known/openid-configuration, status: 200, content_type: text/html, accepted: false, reason: spa-catch-all}
+  - {path: /.well-known/oauth-authorization-server, status: 200, content_type: text/html, accepted: false, reason: spa-catch-all}
+  - {path: /.well-known/oauth-protected-resource, status: 200, content_type: text/html, accepted: false, reason: spa-catch-all}
+  - {path: /.well-known/api-catalog, status: 200, content_type: text/html, accepted: false, reason: spa-catch-all}
+  - {path: /.well-known/ai-plugin.json, status: 403, content_type: application/xml, accepted: false, reason: s3-access-denied}
+  - {path: /.well-known/agent-card.json, status: 403, content_type: application/xml, accepted: false, reason: s3-access-denied}
+  - {path: /.well-known/agent.json, status: 403, content_type: application/xml, accepted: false, reason: s3-access-denied}
+- host: missionbio.github.io
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+x-evidence:
+  fetched: '2026-08-01'
+  hosts_probed: 5
+  paths_probed: 8
+  documents_found: 0

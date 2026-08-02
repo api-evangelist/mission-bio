@@ -1,0 +1,46 @@
+generated: '2026-08-01'
+method: searched
+source: https://anaconda.org/missionbio/missionbio.cli
+name: tapestri
+summary: >-
+  Mission Bio publishes a first-party command-line entry point as the conda package
+  `missionbio.cli` — summarized on Anaconda.org as "Entry point for tapestri cli
+  command". The package is click-based (its only non-Python dependency is `click`)
+  and is distributed on the `missionbio` Anaconda channel alongside the Mosaic
+  analysis stack.
+package:
+  registry: conda
+  channel: missionbio
+  name: missionbio.cli
+  version: 1.1.2
+  license: AGPL
+  platforms: [noarch]
+  url: https://anaconda.org/missionbio/missionbio.cli
+  depends: [click, python]
+  upstream_repo: https://bitbucket.org/missionbio/cli/
+  upstream_repo_status: 404 (private — not publicly browsable)
+install:
+- method: conda
+  command: conda install -c missionbio -c conda-forge missionbio.cli
+- method: installer
+  command: >-
+    Included in the Mosaic installer downloaded from the Tapestri Portal
+    (https://portal.missionbio.com/); select "add to PATH" on Windows for
+    command-line access.
+  docs: https://missionbio.github.io/mosaic/manual/install.html
+commands:
+  documented: false
+  note: >-
+    NO FABRICATION — Mission Bio does not publish a command reference for the
+    `tapestri` CLI on any public surface. The package metadata confirms the binary
+    exists and is click-based, but the subcommand/flag surface is only discoverable
+    by running `tapestri --help` in an installed environment or via the customer-gated
+    Support Center. Do not infer commands from the Tapestri Pipeline web UI.
+related:
+  python_entry_point: import missionbio.mosaic as ms
+  pipeline_ui: https://tapestripipeline.missionbio.com/
+  support: https://support.missionbio.com/hc/en-us
+x-evidence:
+  fetched: '2026-08-01'
+  url: https://api.anaconda.org/package/missionbio/missionbio.cli
+  http_status: 200

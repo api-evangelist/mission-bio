@@ -1,0 +1,123 @@
+generated: '2026-08-01'
+method: searched
+source: https://missionbio.github.io/mosaic/manual/changelog.html
+product: Mosaic (missionbio.mosaic / missionbio.tertiary)
+scheme: semver
+current_version: 3.17.0
+current_version_date: '2026-04-03'
+release_channel: https://anaconda.org/missionbio/missionbio.mosaic
+docs_versions_published:
+- v3.12.2
+- v3.7.0r2
+- v3.7.0r1
+- v3.4.0
+- v3.1.1
+- v2.4.1
+- v1.8.0
+notes: >-
+  Mission Bio's only public dated changelog is the Mosaic release-notes page in the
+  developer docs. Tapestri Pipeline and Tapestri Portal release notes live behind the
+  customer-gated Support Center (support.missionbio.com returns 403 to anonymous
+  clients) and are NOT captured here. Entries below are the recent window only; the
+  live page is the source of truth.
+entries:
+- version: 3.17.0
+  date: '2026-04-03'
+  additions:
+  - Support for Tapestri GE pipeline-created GE assays and a new RNA assay with normalization and clustering methods
+  - "`file` attribute on Sample; `gi` added as a synonym for `get_info()`"
+  - Leiden clustering option
+  - Improved whitelist variant search performance
+  fixes:
+  - Palette merging and genome-compatibility issues in VariantSubcloneTable and COMPASS
+  breaking:
+  - Minimum Python raised from 3.8 to 3.10
+  - umap-learn pinned
+- version: 3.12.0
+  date: '2025-04-21'
+  additions:
+  - "`info` attribute for storing arbitrary metadata (dataframes, dictionaries) across assays"
+  - "COMPASS: clone relabeling, directory support, LOH calling without CNV"
+  - Cytoband information on CNV ploidy plots; `ticks` option for heatmaps
+  - "DNA: `get_annotated_ids()`, `set_annotated_ids()`, `snps()`, and a `genome` property"
+  fixes:
+  - ADO score consistency
+  - Genome version usage in COMPASS
+  breaking: []
+- version: 3.7.0
+  date: '2024-08-05'
+  additions:
+  - "`filter_somatic_variants()` for automatic pathogenic variant filtering"
+  - "Protein clustering/labeling: `cluster_and_label()`, `label_sticky_cells()`"
+  - "`read_depth_dependence()` plot for evaluating NSP normalization"
+  - Switched to pynndescent for faster nearest-neighbor calculations
+  fixes:
+  - CNV amplicon gene-name fetching
+  - Heatmap barcode ordering
+  breaking: []
+- version: 3.4.0
+  date: '2024-04-01'
+  additions:
+  - "`x_groups` support for signaturemap/heatmap; variant filter support in `load()`"
+  - CNV position, performance and uniformity methods
+  - VariantSubcloneTable column hiding and variant filtering
+  fixes:
+  - Whitelist variant loading
+  - Violin plot spacing
+  breaking:
+  - "Plotting functions relocated to `missionbio.plotting`"
+  - "NSP moved to `missionbio.demultiplex.protein.nsp`"
+- version: 3.1.1
+  date: '2023-09-25'
+  additions:
+  - "Relaxed missionbio.h5 requirement to >=4.13.0,<6"
+  fixes:
+  - "Whitelist option in `load()` now does exact variant matching"
+  breaking:
+  - Disabled autouploading to anaconda
+  - Removed H5Reader compatibility check
+- version: 3.1.0
+  date: '2023-09-13'
+  additions:
+  - "`features` parameter on `signature()` for id-level grouping; ANSP approximation for large datasets"
+  - "hg38 support in `get_annotations()`; 2x NSP speedup via statsmodels KDE"
+  - Heatmaps can plot arbitrary dataframes
+  fixes:
+  - NGT layer modification after filtering
+  - Jitter parameter in NSP
+  breaking:
+  - Switched from deprecated JupyterDash to built-in Dash v2.11
+- version: 3.0.1
+  date: '2023-06-20'
+  additions:
+  - "`crosstab()`, `crosstabmap()`, `hierarchical_cluster()` methods"
+  fixes:
+  - Heatmap subclustering
+  - Custom CSS inclusion in workflows
+  - Label-setting with dictionaries
+  breaking:
+  - "matplotlib dependency moved from <=3.2.2 to >=3.4.0"
+- version: 3.0.0
+  date: '2023-06-16'
+  additions:
+  - COMPASS wrapper; new variant filters accounting for missing data
+  - "`plot_kind` parameter on `group_by_genotype()`; progress bar on `load()`"
+  - "`x_groups` for heatmap x-axis grouping; Config for colorscale customization"
+  breaking:
+  - Plotting and algorithm modules restructured
+  - "`apply_filter` renamed to `filter_variants`"
+  - Legacy loom conversion and CSV merge functions removed
+version_history_conda:
+  channel: missionbio
+  package: missionbio.mosaic
+  released: ['0.15.1', '1.0.0', '1.1.0', '1.2.0', '1.2.1', '1.3.0', '1.4.0', '1.4.1',
+    '1.4.2', '1.5.0', '1.6.1', '1.6.2', '1.7.1', '1.7.2', '1.7.3', '1.7.4', '1.8.0',
+    '1.8.1', '2.0a0', '2.0', '2.0.1a0', '2.0.1', '2.0.2', '2.0.3', '2.0.4', '2.0.5',
+    '2.0.6', '2.0.7', '2.1', '2.2', '2.3', '2.4', '2.4.1', '3.0', '3.0.1', '3.1.1',
+    '3.4', '3.7', '3.12.2', '3.17.0']
+x-evidence:
+  fetched: '2026-08-01'
+  urls:
+  - https://missionbio.github.io/mosaic/manual/changelog.html
+  - https://api.anaconda.org/package/missionbio/missionbio.mosaic
+  http_status: 200

@@ -1,0 +1,186 @@
+generated: '2026-08-01'
+method: searched
+source: https://anaconda.org/missionbio
+notes: >-
+  Mission Bio does not distribute its client libraries on PyPI, npm, Maven Central,
+  NuGet, RubyGems, Packagist, crates.io or pkg.go.dev. The entire first-party stack
+  is published as conda packages on the `missionbio` Anaconda.org channel and is
+  installed either with the Mosaic installer downloaded from the Tapestri Portal or
+  with `conda create --name mosaic -c missionbio -c conda-forge missionbio.tertiary`.
+  Every entry below was read from the Anaconda.org package API on 2026-08-01.
+  The PyPI project named `mosaic` is an unrelated third-party poster composer and is
+  NOT Mission Bio's package.
+registries_probed:
+- registry: anaconda.org
+  channel: missionbio
+  url: https://anaconda.org/missionbio
+  status: 200
+  packages_found: 12
+- registry: pypi
+  status: 404
+  note: no missionbio / missionbio-mosaic / tapestri project
+- registry: npm
+  status: none
+- registry: rubygems
+  status: none
+- registry: maven-central
+  status: none
+- registry: nuget
+  status: none
+- registry: crates.io
+  status: none
+- registry: packagist
+  status: none
+- registry: pkg.go.dev
+  status: none
+install:
+  primary: >-
+    conda create --name mosaic -c missionbio -c conda-forge "missionbio.tertiary" "python-kaleido=0.1.0"
+  docs: https://missionbio.github.io/mosaic/manual/install.html
+  installer_note: >-
+    Preferred install is a platform installer (Linux/macOS/Windows) downloaded from the
+    Tapestri Portal; the Linux installer is published at
+    https://dl.missionbio.io/mosaic/mosaic-v3.12.2-Linux-x86_64.sh
+packages:
+- language: python
+  registry: conda
+  channel: missionbio
+  name: missionbio.mosaic
+  version: 3.17.0
+  license: AGPL
+  platforms: [noarch]
+  url: https://anaconda.org/missionbio/missionbio.mosaic
+  install: conda install -c missionbio -c conda-forge missionbio.mosaic
+  docs: https://missionbio.github.io/mosaic/
+  description: Tertiary analysis and visualization of Tapestri single-cell multi-omics data
+  official: true
+- language: python
+  registry: conda
+  channel: missionbio
+  name: missionbio.mosaic-base
+  version: 3.17.0
+  license: AGPL
+  platforms: [noarch]
+  url: https://anaconda.org/missionbio/missionbio.mosaic-base
+  description: Base build of the Mosaic package
+  official: true
+- language: python
+  registry: conda
+  channel: missionbio
+  name: missionbio.tertiary
+  version: 3.8.1
+  license: GPL-3
+  platforms: [noarch]
+  url: https://anaconda.org/missionbio/missionbio.tertiary
+  install: conda install -c missionbio -c conda-forge missionbio.tertiary
+  description: Meta-package pulling the full Mission Bio tertiary-analysis environment
+  official: true
+- language: python
+  registry: conda
+  channel: missionbio
+  name: missionbio.h5
+  version: 5.18.0
+  license: GPL-3
+  platforms: [noarch]
+  url: https://anaconda.org/missionbio/missionbio.h5
+  description: Library for reading and writing Tapestri .h5 data files
+  official: true
+- language: python
+  registry: conda
+  channel: missionbio
+  name: missionbio.h5-base
+  version: 5.18.0
+  license: GPL-3
+  platforms: [noarch]
+  url: https://anaconda.org/missionbio/missionbio.h5-base
+  description: Base build of the Tapestri .h5 library
+  official: true
+- language: python
+  registry: conda
+  channel: missionbio
+  name: missionbio.demultiplex
+  version: 6.8.0
+  license: GPL-3
+  platforms: [noarch]
+  url: https://anaconda.org/missionbio/missionbio.demultiplex
+  description: Sample demultiplexing (NSP, PACE, SPARC, DNA/protein assignment)
+  official: true
+- language: python
+  registry: conda
+  channel: missionbio
+  name: missionbio.plotting
+  version: 1.8.2
+  license: GPL-3
+  platforms: [noarch]
+  url: https://anaconda.org/missionbio/missionbio.plotting
+  description: Plot primitives (Heatmap, LinePlot, PhyloTree, Fishplot, BarGraph)
+  official: true
+- language: python
+  registry: conda
+  channel: missionbio
+  name: missionbio.annotation
+  version: 1.11.1
+  license: GPL-3
+  platforms: [noarch]
+  url: https://anaconda.org/missionbio/missionbio.annotation
+  description: Variant annotation services for Tapestri DNA assays
+  official: true
+- language: python
+  registry: conda
+  channel: missionbio
+  name: missionbio.filter
+  version: 3.7.0
+  license: GPL-3
+  platforms: [noarch]
+  url: https://anaconda.org/missionbio/missionbio.filter
+  description: Variant and cell filtering for Tapestri data
+  official: true
+- language: python
+  registry: conda
+  channel: missionbio
+  name: missionbio.config
+  version: 1.2.2
+  license: GPL-3
+  platforms: [noarch]
+  url: https://anaconda.org/missionbio/missionbio.config
+  description: Shared configuration (colorscales, defaults) for the Mission Bio stack
+  official: true
+- language: python
+  registry: conda
+  channel: missionbio
+  name: missionbio.cli
+  version: 1.1.2
+  license: AGPL
+  platforms: [noarch]
+  url: https://anaconda.org/missionbio/missionbio.cli
+  description: Entry point for the `tapestri` command-line tool (click-based)
+  depends: [click, python]
+  official: true
+- language: c++
+  registry: conda
+  channel: missionbio
+  name: compass
+  version: 2.0.0
+  license: GPL-3
+  platforms: [linux-64, osx-64, win-64]
+  url: https://anaconda.org/missionbio/compass
+  source: https://github.com/MissionBio/compass
+  description: COMPASS — COpy number and Mutations Phylogeny from Amplicon Single-cell Sequencing
+  official: true
+source_code:
+- name: mosaic (documentation + example datasets)
+  url: https://github.com/MissionBio/mosaic
+  license: GPL-3.0
+- name: mosaic-jupyter (vignette notebooks)
+  url: https://github.com/MissionBio/mosaic-jupyter
+- name: tools (BarcodeExtractor, BarcodeScripts)
+  url: https://github.com/MissionBio/tools
+- name: compass
+  url: https://github.com/MissionBio/compass
+x-evidence:
+  fetched: '2026-08-01'
+  urls:
+  - https://api.anaconda.org/packages/missionbio
+  - https://api.anaconda.org/package/missionbio/missionbio.mosaic
+  - https://missionbio.github.io/mosaic/manual/install.html
+  http_status: 200

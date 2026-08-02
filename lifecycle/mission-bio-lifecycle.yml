@@ -1,0 +1,67 @@
+generated: '2026-08-01'
+method: searched
+source: https://missionbio.github.io/mosaic/manual/changelog.html
+scope: >-
+  Mission Bio ships libraries and instruments, not a hosted web API, so its lifecycle
+  contract is a PACKAGE lifecycle (conda versions on the missionbio channel + versioned
+  Sphinx docs), not an HTTP API lifecycle. There is no URI/header API version, no
+  Sunset/Deprecation header surface, and no published SLA.
+versioning:
+  scheme: semver
+  applies_to: conda packages on the `missionbio` Anaconda channel
+  current:
+    missionbio.mosaic: 3.17.0
+    missionbio.tertiary: 3.8.1
+    missionbio.h5: 5.18.0
+    missionbio.demultiplex: 6.8.0
+    missionbio.filter: 3.7.0
+    missionbio.annotation: 1.11.1
+    missionbio.plotting: 1.8.2
+    missionbio.config: 1.2.2
+    missionbio.cli: 1.1.2
+    compass: 2.0.0
+  docs: https://missionbio.github.io/mosaic/manual/changelog.html
+  versioned_docs:
+    published: true
+    pattern: https://missionbio.github.io/mosaic/v<version>/
+    versions: [v1.8.0, v2.4.1, v3.1.1, v3.4.0, v3.7.0r1, v3.7.0r2, v3.12.2]
+    note: >-
+      Older Mosaic doc trees stay online, which is a real backward-compatibility
+      affordance for users pinned to an older release.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    No written deprecation or support-window policy is published. Breaking changes are
+    announced only in the Mosaic release notes and are visible as major-version bumps —
+    e.g. 3.0.0 renamed `apply_filter` to `filter_variants` and removed the legacy loom
+    conversion and CSV merge functions; 3.4.0 relocated plotting to
+    `missionbio.plotting` and NSP to `missionbio.demultiplex.protein.nsp`; 3.17.0
+    raised the minimum Python from 3.8 to 3.10.
+  observed_breaking_changes:
+  - {version: 3.17.0, change: minimum Python raised 3.8 -> 3.10}
+  - {version: 3.4.0, change: plotting moved to missionbio.plotting; NSP moved to missionbio.demultiplex.protein.nsp}
+  - {version: 3.0.0, change: apply_filter renamed filter_variants; loom conversion and CSV merge removed}
+sla:
+  url: null
+  uptime_target: null
+status_page:
+  url: null
+  note: >-
+    No status.missionbio.com and no third-party status page was found; the host does
+    not resolve. Therefore NO `StatusPage` pointer is wired in apis.yml.
+support:
+  url: https://support.missionbio.com/hc/en-us
+  note: Support Center returns 403 to anonymous clients — customer-gated.
+  contact: support@missionbio.com
+  response_target: within 2 business days (per https://www.missionbio.com/company/contact)
+end_of_life:
+  published: false
+deprecated_operations: []
+x-evidence:
+  fetched: '2026-08-01'
+  urls:
+  - https://missionbio.github.io/mosaic/manual/changelog.html
+  - https://api.anaconda.org/packages/missionbio
+  - https://www.missionbio.com/company/contact
+  status_host_probe: {host: status.missionbio.com, dns: NXDOMAIN}

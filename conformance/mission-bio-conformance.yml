@@ -1,0 +1,92 @@
+generated: '2026-08-01'
+method: derived
+source: repo artifacts + live probes of every Mission Bio host (2026-08-01)
+summary: >-
+  Mission Bio publishes no HTTP API contract, so almost every cross-cutting web-API
+  standard is inapplicable rather than failed. What it does conform to is a
+  bioinformatics file/format stack: HDF5 for the Tapestri .h5 output, conda/CEP
+  packaging on the missionbio Anaconda channel, and semver for its libraries. No
+  compliance certifications (SOC 2, ISO 27001, ISO 13485, HIPAA, PCI DSS, FedRAMP,
+  CSA STAR) were found published on any Mission Bio surface, so NO `Compliance` or
+  `TrustCenter` pointer is wired in apis.yml.
+standards:
+- id: openapi
+  conforms: false
+  evidence: >-
+    Probed /openapi.json, /openapi.yaml, /swagger.json, /v1/openapi.json, /api-docs
+    on www.missionbio.com, missionbio.com, api.missionbio.com (NXDOMAIN),
+    portal.missionbio.com, tapestripipeline.missionbio.com and missionbio.github.io.
+    Only SPA catch-all HTML (200 text/html) or 404/403 — no parseable spec.
+- id: graphql
+  conforms: false
+  evidence: no /graphql surface advertised or reachable
+- id: asyncapi
+  conforms: false
+  evidence: no event, streaming or webhook surface is documented
+- id: mcp
+  conforms: false
+  evidence: no hosted MCP server found in docs, registries or search
+- id: a2a
+  conforms: false
+  evidence: >-
+    /.well-known/agent-card.json and /.well-known/agent.json miss on all five hosts;
+    portal 200s are SPA HTML and were rejected
+- id: oauth2
+  conforms: false
+  evidence: no oauth2 security scheme or documented OAuth flow
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration absent on all hosts
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: false
+  evidence: absent on all hosts
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt absent on all hosts
+- id: rfc9727-api-catalog
+  conforms: false
+  evidence: /.well-known/api-catalog absent on all hosts
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: not applicable — no HTTP API surface
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: no deprecation policy or Sunset header surface published
+- id: hdf5
+  conforms: true
+  evidence: >-
+    Tapestri Pipeline output is a standard HDF5 .h5 file; missionbio.h5 (5.18.0) is
+    the published reader/writer and the structure is documented at
+    https://missionbio.github.io/mosaic/manual/data_structure.html
+- id: conda-package-format
+  conforms: true
+  evidence: 12 first-party packages published on the `missionbio` Anaconda.org channel
+- id: semver
+  conforms: true
+  evidence: all missionbio.* package versions and the Mosaic release notes follow semver
+- id: hsts
+  conforms: true
+  evidence: 'www.missionbio.com sends Strict-Transport-Security with max-age=31536000 (security/mission-bio-domain-security.yml)'
+- id: tls-1.3
+  conforms: true
+  evidence: 'www.missionbio.com negotiates TLSv1.3 (security/mission-bio-domain-security.yml)'
+- id: dnssec
+  conforms: false
+  evidence: 'missionbio.com is not DNSSEC-signed (security/mission-bio-domain-security.yml)'
+- id: caa
+  conforms: false
+  evidence: 'no CAA records on missionbio.com (security/mission-bio-domain-security.yml)'
+- id: spf
+  conforms: true
+  evidence: 'SPF record present on missionbio.com'
+- id: dmarc
+  conforms: true
+  evidence: 'DMARC present with p=quarantine on missionbio.com'
+certifications_published: []
+x-evidence:
+  fetched: '2026-08-01'
+  method: live probes + repo artifact review
+  related:
+  - well-known/mission-bio-well-known.yml
+  - security/mission-bio-domain-security.yml
+  - packages/mission-bio-packages.yml

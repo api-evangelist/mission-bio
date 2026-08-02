@@ -1,0 +1,99 @@
+generated: '2026-08-01'
+method: searched
+source: https://missionbio.github.io/mosaic/manual/data_structure.html
+format: HDF5 (.h5)
+summary: >-
+  Mission Bio has no OpenAPI to derive an entity graph from, but it does publish a
+  real, documented data model: the Tapestri Pipeline emits a single .h5 (HDF5) file
+  per sample, and the Mosaic Python library exposes it as a `Sample` (or `SampleGroup`
+  for merged multi-sample files) containing one or more assay objects. Every assay
+  inherits from `_Assay` and stores the same four-part structure: metadata, row
+  attributes (per barcode/cell), column attributes (per feature), and layers
+  (barcodes x features numeric matrices), plus an `info` store for arbitrary objects.
+  The relationships below were read from the published data-structure and API
+  reference pages — no field was invented.
+entry_points:
+  load: ms.load(h5path, raw=False, filter_variants=True, filter_cells=False, single=True)
+  save: ms.save(sample, '/path/to/save/h5')
+  import: import missionbio.mosaic as ms
+  docs: https://missionbio.github.io/mosaic/manual/getting_started.html
+entities:
+- name: SampleGroup
+  class: missionbio.mosaic.samplegroup.SampleGroup
+  docs: https://missionbio.github.io/mosaic/pages/missionbio.mosaic.samplegroup.SampleGroup.html
+  description: Collection of Sample objects, returned when a merged multi-sample .h5 is loaded with single=False
+- name: Sample
+  class: missionbio.mosaic.sample.Sample
+  docs: https://missionbio.github.io/mosaic/pages/missionbio.mosaic.sample.Sample.html
+  description: One Tapestri run/sample; container for the assay objects present in the .h5
+  attributes: [file]
+- name: _Assay
+  class: missionbio.mosaic.assay._Assay
+  docs: https://missionbio.github.io/mosaic/pages/missionbio.mosaic.assay._Assay.html
+  description: Abstract base for every assay; defines metadata / row_attrs / col_attrs / layers / info
+- name: Dna
+  class: missionbio.mosaic.dna.Dna
+  docs: https://missionbio.github.io/mosaic/pages/missionbio.mosaic.dna.Dna.html
+  description: Single-cell DNA variant and genotype assay
+  col_attrs: variants
+  layers: [NGT, AF, DP, GQ, FILTER_MASK]
+  layer_semantics:
+    NGT: genotype call (0/1/2/3)
+    AF: allelic fraction
+    DP: read depth
+    GQ: genotype quality
+    FILTER_MASK: per-cell/variant filter mask
+- name: Cnv
+  class: missionbio.mosaic.cnv.Cnv
+  docs: https://missionbio.github.io/mosaic/pages/missionbio.mosaic.cnv.Cnv.html
+  description: Copy-number assay, amplicon-resolved
+  layers: [read_counts]
+- name: Protein
+  class: missionbio.mosaic.protein.Protein
+  docs: https://missionbio.github.io/mosaic/pages/missionbio.mosaic.protein.Protein.html
+  description: Antibody-derived-tag immunophenotype assay
+  col_attrs: antibodies
+  layers: [read_counts, normalized_counts, scaled_counts]
+- name: Rna
+  class: missionbio.mosaic.rna.Rna
+  docs: https://missionbio.github.io/mosaic/pages/missionbio.mosaic.rna.Rna.html
+  description: RNA assay (added in Mosaic 3.17.0 alongside the Tapestri GE pipeline)
+- name: Ge
+  class: missionbio.mosaic.ge.Ge
+  docs: https://missionbio.github.io/mosaic/pages/missionbio.mosaic.ge.Ge.html
+  description: Gene-expression assay produced by the Tapestri GE pipeline
+relationships:
+- {from: SampleGroup, to: Sample, kind: has_many, via: samples}
+- {from: Sample, to: Dna, kind: has_one, via: dna}
+- {from: Sample, to: Cnv, kind: has_one, via: cnv}
+- {from: Sample, to: Protein, kind: has_one, via: protein}
+- {from: Sample, to: Rna, kind: has_one, via: rna}
+- {from: Sample, to: Ge, kind: has_one, via: ge}
+- {from: Dna, to: _Assay, kind: inherits}
+- {from: Cnv, to: _Assay, kind: inherits}
+- {from: Protein, to: _Assay, kind: inherits}
+- {from: Rna, to: _Assay, kind: inherits}
+- {from: Ge, to: _Assay, kind: inherits}
+- {from: _Assay, to: barcode, kind: has_many, via: row_attrs.barcode, note: rows are cells/droplet barcodes; the join key shared across all assays in a Sample}
+- {from: _Assay, to: feature, kind: has_many, via: col_attrs.id, note: columns are variants (Dna), amplicons (Cnv) or antibodies (Protein)}
+- {from: _Assay, to: layer, kind: has_many, via: layers, note: each layer is a barcodes x features matrix}
+join_key:
+  field: row_attrs.barcode
+  note: >-
+    The cell barcode is what makes Tapestri multi-omic — the same barcode indexes the
+    Dna, Cnv and Protein layers of one Sample, so genotype and immunophenotype are
+    joinable per cell.
+algorithms_over_the_model:
+- {name: COMPASS, class: missionbio.mosaic.algorithms.compass.COMPASS, purpose: copy number and mutation phylogeny}
+- {name: GroupByGenotype, class: missionbio.mosaic.algorithms.group_by_genotype.GroupByGenotype, purpose: subclone grouping}
+- {name: DnaAssignment, class: missionbio.mosaic.algorithms.dna_assignment.DnaAssignment, purpose: sample demultiplexing by DNA}
+- {name: NSP, class: missionbio.demultiplex.protein.nsp.NSP, purpose: protein normalization}
+- {name: SPARC, class: missionbio.demultiplex.phylogeny.sparc.SPARC, purpose: phylogeny reconstruction}
+subway: null
+x-evidence:
+  fetched: '2026-08-01'
+  urls:
+  - https://missionbio.github.io/mosaic/manual/data_structure.html
+  - https://missionbio.github.io/mosaic/manual/getting_started.html
+  - https://github.com/MissionBio/mosaic/tree/master/docs/pages
+  http_status: 200
