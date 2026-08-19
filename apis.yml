@@ -16,7 +16,7 @@ x-source: harvest:secondary-market
 x-tier: stub
 x-tier-reason: harvest
 image: https://cdn.sanity.io/images/98tnxhqn/production/b6650c303fe1615e07ddb6abd839e65ff7ad8e9b-448x332.png
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-08-01'
 modified: '2026-08-01'
 tags:
